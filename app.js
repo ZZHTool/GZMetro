@@ -146,6 +146,18 @@ const metroData = {
 
 // 2. 状态变量
 let currentLineKey = "";
+let currentAudio = null;
+
+function playAudio(src) {
+    if (currentAudio) {
+        currentAudio.pause(); // 如果有正在播放的音频，先暂停
+        currentAudio.currentTime = 0; // 进度条归零
+    }
+    currentAudio = new Audio(src);
+    currentAudio.play().catch(err => {
+        console.warn("音频播放失败，可能是浏览器拦截了自动播放，需用户交互后才能播放:", err);
+    });
+}
 
 // 3. 获取 DOM 节点
 const portalView = document.getElementById('portal-view');
@@ -278,7 +290,7 @@ function updateLED(textContent) {
 }
 
 document.getElementById('btn-door-close').addEventListener('click', () => {
-    updateLED("叮咚！车门即将关闭，请远离车门！ Please stand clear of the closing doors! ");
+    updateLED("车门即将关闭，请注意安全，谨防被夹！ The doors are closing, take care of your safety, and beware of being clamped! ");
 });
 
 document.getElementById('btn-next-station').addEventListener('click', () => {
@@ -291,6 +303,9 @@ document.getElementById('btn-next-station').addEventListener('click', () => {
 
     const fullText = `下一站：${next}${transferZh}！ Next station: ${next}${transferEn}! `;
     updateLED(fullText);
+    if (currentLineKey.startsWith('line11')) {
+        playAudio(`line11/${next}.mp3`);
+    }
 });
 
 // 执行初始化
