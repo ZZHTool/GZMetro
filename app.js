@@ -304,7 +304,8 @@ document.getElementById('btn-next-station').addEventListener('click', () => {
     const fullText = `下一站：${next}${transferZh}！ Next station: ${next}${transferEn}! `;
     updateLED(fullText);
     if (currentLineKey.startsWith('line11')) {
-        playAudio(`line11/${next}.mp3`);
+        const direction = dirSelect.value;
+        playAudio(`line11/${direction}/${next}.mp3`);
     }
 });
 
