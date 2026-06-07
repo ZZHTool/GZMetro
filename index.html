@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州地铁报站模拟器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="portal-view" class="view active">
+            <header>
+                <h1>羊城轨道交通 · 线网选择</h1>
+            </header>
+            <main>
+                <div class="line-grid" id="line-grid">
+                </div>
+            </main>
+        </div>
+
+        <div id="simulator-view" class="view">
+            <header class="sim-header">
+                <button id="btn-back" class="btn-back">⬅ 返回首页</button>
+                <h1 id="sim-title">广州地铁报站模拟器</h1>
+            </header>
+
+            <main>
+                <section class="control-panel">
+                    <div class="form-group">
+                        <label for="dir-select">运行方向：</label>
+                        <select id="dir-select">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="station-select">当前/下一站：</label>
+                        <select id="station-select">
+                        </select>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="btn-door-close" class="btn">🔔 关门提示音</button>
+                        <button id="btn-next-station" class="btn dynamic-btn">📢 下一站报站</button>
+                    </div>
+                </section>
+
+                <section class="display-screen">
+                    <div class="marquee-window">
+                        <div id="marquee-text" class="marquee-content">
+                            <span class="led-red">欢迎乘坐广州地铁！ Welcome to Guangzhou Metro! </span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
