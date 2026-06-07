@@ -268,6 +268,7 @@ function updateStations() {
 btnBack.addEventListener('click', () => {
     simulatorView.classList.remove('active');
     portalView.classList.add('active');
+    updateLED("欢迎乘坐广州地铁！ Welcome to Guangzhou Metro! ");
 });
 
 dirSelect.addEventListener('change', updateStations);
