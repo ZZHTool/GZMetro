@@ -259,7 +259,7 @@ function updateStations() {
     for (let i = 0; i < stationList.length - 1; i++) {
         let opt = document.createElement('option');
         opt.value = JSON.stringify({ current: stationList[i], next: stationList[i + 1] });
-        opt.innerText = `当前：${stationList[i]} -> 下一站：${stationList[i + 1]}`;
+        opt.innerText = `${stationList[i]} -> ${stationList[i + 1]}`;
         stationSelect.appendChild(opt);
     }
 }
@@ -277,7 +277,7 @@ const marqueeText = document.getElementById('marquee-text');
 function updateLED(textContent) {
     marqueeText.innerHTML = `<span class="led-red">${textContent}</span>`;
     marqueeText.style.animation = 'none';
-    marqueeText.offsetHeight; // 触发回流重置动画
+    marqueeText.offsetHeight;
     marqueeText.style.animation = null;
 }
 
@@ -291,9 +291,9 @@ document.getElementById('btn-next-station').addEventListener('click', () => {
     const transfer = metroData[currentLineKey].transfers[next];
 
     let transferZh = transfer ? `，可换乘${transfer}` : "";
-    let transferEn = transfer ? `, change is available for Line ${transfer.replace(/[^0-9]/g, '')}` : "";
+    let transferEn = transfer ? `, the interchange with Line ${transfer.replace(/[^0-9]/g, '')}` : "";
 
-    const fullText = `下一站：${next}${transferZh}！ Next station: ${next}${transferEn}! `;
+    const fullText = `下一站：${next}${transferZh}。The Next station is ${next}${transferEn}! `;
     updateLED(fullText);
     if (currentLineKey.startsWith('line11')) {
         const direction = dirSelect.value;
