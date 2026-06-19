@@ -50,7 +50,7 @@ const metroData = {
     },
     "line7": {
         name: "7号线",
-        color: "#97d700",
+        color: "#8EC31D",
         textColor: "#000000",
         stations: ["美的大道", "北滘公园", "美的", "南涌", "锦龙", "陈村", "陈村北", "大洲", "广州南站", "石壁", "谢村", "钟村", "汉溪长隆", "南村万博", "员岗", "板桥", "大学城南", "深井", "长洲", "洪圣沙", "裕丰围", "大沙东", "姬堂", "加庄", "科丰路", "萝岗", "水西", "燕山"],
         transfers: { "广州南站": "2号线、22号线", "石壁": "2号线", "汉溪长隆": "3号线", "南村万博": "18号线", "大学城南": "4号线", "裕丰围": "13号线、11号线", "大沙东": "5号线", "萝岗": "6号线", "水西": "21号线" }
@@ -71,19 +71,21 @@ const metroData = {
     },
     "line10": {
         name: "10号线",
-        color: "#004B87",
+        color: "#7389B2",
         textColor: "#ffffff",
         stations: ["杨箕东", "五羊邨", "东湖", "滨江东路", "中大南门", "五凤", "东晓南", "工业大道南", "大干围", "东沙", "花围", "西塱"],
         transfers: { "五羊邨": "5号线", "东湖": "6号线、12号线", "五凤": "11号线", "东晓南": "2号线", "西塱": "1号线、22号线" }
     },
     "line11_outer": {
         name: "11号线",
-        color: "#c2a05d",
+        color: "#F0B200",
         textColor: "#000000",
-        isCircle: true, 
-        stations_inner: ["广州火车站", "流花路", "彩虹桥", "中山八", "如意坊", "芳村", "芳村大道东", "沙涌", "鹤洞东", "下芳村", "大冲口", "龙导尾", "燕子岗", "江泰路", "五凤", "逸景路", "大塘", "龙潭", "赤沙", "琶洲", "员村", "天河公园", "华景新城", "广州东站", "沙河", "云台花园", "大金钟", "广园新村", "梓元岗", "广州火车站"],
-        stations_outer: ["广州火车站", "梓元岗", "广园新村", "大金钟", "云台花园", "沙河", "广州东站", "华景新城", "天河公园", "员村", "琶洲", "赤沙", "龙潭", "大塘", "逸景路", "五凤", "江泰路", "燕子岗", "龙导尾", "大冲口", "下芳村", "鹤洞东", "沙涌", "芳村大道东", "芳村", "如意坊", "中山八", "彩虹桥", "流花路", "广州火车站"],
-        transfers: {"广州火车站": "2号线、5号线", "彩虹桥": "8号线", "中山八": "5号线", "如意坊": "6号线", "江泰路": "2号线", "五凤": "10号线", "大塘": "3号线", "龙潭": "18号线", "琶洲": "8号线", "员村": "5号线、21号线", "天河公园": "21号线、12号线", "广州东站": "1号线、3号线", "沙河": "6号线"}
+        isCircle: true,
+        stations_outer: ["赤沙", "琶洲", "员村", "天河公园", "华景新城", "广州东站", "沙河", "云台花园", "大金钟", "广园新村", "梓元岗", "流花", "彩虹桥", "中山八", "如意坊", "芳村", "芳村大道东", "沙涌", "鹤洞东", "下芳村", "大冲口", "龙导尾", "燕子岗", "江泰路", "五凤", "逸景路", "大塘", "龙潭", "赤沙"],
+        stations_outer_en: ["Chisha", "Pazhou", "Yuancun", "Tianhe Park", "Huajing New Town", "Guangzhou East Railway Station", "Shahe", "Yuntai Garden", "Dajinzhong", "Guangyuan Xincun", "Ziyuangang", "Liuhua", "Caihongqiao", "Zhongshanba", "Ruyifang", "Fangcun", "Fangcun Dadao East", "Shayong", "Hedong East", "Xiafangcun", "Dachongkou", "Longdaowei", "Yanzigang", "Jiangtai Road", "Wufeng", "Yijing Road", "Datang", "Longtan", "Chisha"],
+        stations_inner: ["梓元岗", "广园新村", "大金钟", "云台花园", "沙河", "广州东站", "华景新城", "天河公园", "员村", "琶洲", "赤沙", "龙潭", "大塘", "逸景路", "五凤", "江泰路", "燕子岗", "龙导尾", "大冲口", "下芳村", "鹤洞东", "沙涌", "芳村大道东", "芳村", "如意坊", "中山八", "彩虹桥", "流花", "梓元岗"],
+        stations_inner_en: ["Ziyuangang", "Guangyuan Xincun", "Dajinzhong", "Yuntai Garden", "Shahe", "Guangzhou East Railway Station", "Huajing New Town", "Tianhe Park", "Yuancun", "Pazhou", "Chisha", "Longtan", "Datang", "Yijing Road", "Wufeng", "Jiangtai Road", "Yanzigang", "Longdaowei", "Dachongkou", "Xiafangcun", "Hedong East", "Shayong", "Fangcun Dadao East", "Fangcun", "Ruyifang", "Zhongshanba", "Caihongqiao", "Liuhua", "Ziyuangang"],
+        transfers: {"彩虹桥": "8号线", "中山八": "5号线", "如意坊": "6号线", "江泰路": "2号线", "五凤": "10号线", "大塘": "3号线", "龙潭": "18号线", "琶洲": "8号线", "员村": "5号线、21号线", "天河公园": "21号线", "广州东站": "1号线、3号线", "沙河": "6号线"}
     },
     "line13": {
         name: "13号线",
@@ -126,13 +128,6 @@ const metroData = {
         textColor: "#ffffff",
         stations: ["陈头岗", "广州南站", "市广路", "番禺广场"],
         transfers: { "广州南站": "2号线、7号线", "番禺广场": "3号线、18号线" }
-    },
-    "apm": {
-        name: "APM线",
-        color: "#00b5e2",
-        textColor: "#000000",
-        stations: ["广州塔", "海心沙", "大剧院", "花城大道", "妇儿中心", "黄埔大道", "天河南", "体育中心南", "林和西"],
-        transfers: { "广州塔": "3号线", "林和西": "3号线" }
     }
 };
 
@@ -209,23 +204,21 @@ function enterSimulator(lineKey) {
     // 更新方向下拉菜单
     dirSelect.innerHTML = '';
     if (line.isCircle) {
-        // 如果是 11 号线环线，方向直接更改为 内环 / 外环
         let opt1 = document.createElement('option');
         opt1.value = "inner";
-        opt1.innerText = "运行方向：内环 (顺时针环行)";
+        opt1.innerText = "内环 (顺时针环行)";
         let opt2 = document.createElement('option');
         opt2.value = "outer";
-        opt2.innerText = "运行方向：外环 (逆时针环行)";
+        opt2.innerText = "外环 (逆时针环行)";
         dirSelect.appendChild(opt1);
         dirSelect.appendChild(opt2);
     } else {
-        // 普通线路沿用头尾终点站逻辑
         let opt1 = document.createElement('option');
         opt1.value = "forward";
-        opt1.innerText = `运行方向：开往 ${line.stations[line.stations.length - 1]}`;
+        opt1.innerText = `开往：${line.stations[line.stations.length - 1]}`;
         let opt2 = document.createElement('option');
         opt2.value = "backward";
-        opt2.innerText = `运行方向：开往 ${line.stations[0]}`;
+        opt2.innerText = `开往：${line.stations[0]}`;
         dirSelect.appendChild(opt1);
         dirSelect.appendChild(opt2);
     }
@@ -240,15 +233,27 @@ function updateStations() {
 
     let stationList = [];
 
-    // 环线专属路由数据选择
     if (line.isCircle) {
         if (direction === "inner") {
-            stationList = [...line.stations_inner];
+            zhList = [...line.stations_inner];
+            enList = [...line.stations_inner_en];
         } else {
-            stationList = [...line.stations_outer];
+            zhList = [...line.stations_outer];
+            enList = [...line.stations_outer_en];
         }
+        stationSelect.innerHTML = '';
+        for (let i = 0; i < zhList.length - 1; i++) {
+            let opt = document.createElement('option');
+            opt.value = JSON.stringify({
+                current_zh: zhList[i],
+                next_zh: zhList[i + 1],
+                next_en: enList[i + 1]
+            });
+            opt.innerText = `${zhList[i]} -> ${zhList[i + 1]}`;
+            stationSelect.appendChild(opt);
+        }
+        return;
     } else {
-        // 普通点对点线路数据选择
         stationList = [...line.stations];
         if (direction === "backward") {
             stationList.reverse();
@@ -266,6 +271,11 @@ function updateStations() {
 
 // 返回首页逻辑
 btnBack.addEventListener('click', () => {
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
     simulatorView.classList.remove('active');
     portalView.classList.add('active');
     updateLED("欢迎乘坐广州地铁！ Welcome to Guangzhou Metro! ");
@@ -283,22 +293,36 @@ function updateLED(textContent) {
 }
 
 document.getElementById('btn-door-close').addEventListener('click', () => {
-    updateLED("车门即将关闭，请注意安全，谨防被夹！ The doors are closing, take care of your safety, and beware of being clamped! ");
+    updateLED("车门即将关闭，请注意安全，谨防被夹！ The doors are closing, take care your safety, and beware of being clamped! ");
 });
 
 document.getElementById('btn-next-station').addEventListener('click', () => {
     if (!stationSelect.value || !currentLineKey) return;
-    const { next } = JSON.parse(stationSelect.value);
-    const transfer = metroData[currentLineKey].transfers[next];
+    const raw = JSON.parse(stationSelect.value);
+    const next_zh = raw.next_zh || raw.next;
+    const next_en = raw.next_en || next_zh; 
+    const transfer = metroData[currentLineKey].transfers[next_zh];
 
     let transferZh = transfer ? `，可换乘${transfer}` : "";
-    let transferEn = transfer ? `, the interchange with Line ${transfer.replace(/[^0-9]/g, '')}` : "";
+    let transferEn = "";
 
-    const fullText = `下一站：${next}${transferZh}。The Next station is ${next}${transferEn}! `;
+    if (transfer) {
+        const lines = transfer.match(/\d+/g);
+
+        if (lines.length === 1) {
+            transferEn = `, the interchange with Line ${lines[0]}`;
+        } else {
+            transferEn =
+                ", the interchange with " +
+                lines.map(line => `Line ${line}`).join(" and ");
+        }
+    }
+
+    const fullText = `下一站：${next_zh}${transferZh}， The Next station is ${next_en}${transferEn} `;
     updateLED(fullText);
     if (currentLineKey.startsWith('line11')) {
         const direction = dirSelect.value;
-        playAudio(`line11/${direction}/${next}.mp3`);
+        playAudio(`line11/${direction}/${next_zh}.mp3`);
     }
 });
 
