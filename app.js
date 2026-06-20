@@ -81,9 +81,9 @@ const metroData = {
         color: "#F0B200",
         textColor: "#000000",
         isCircle: true,
-        stations_outer: ["赤沙", "琶洲", "员村", "天河公园", "华景新城", "广州东站", "沙河", "云台花园", "大金钟", "广园新村", "梓元岗", "流花", "彩虹桥", "中山八", "如意坊", "芳村", "芳村大道东", "沙涌", "鹤洞东", "下芳村", "大冲口", "龙导尾", "燕子岗", "江泰路", "五凤", "逸景路", "大塘", "龙潭", "赤沙"],
+        stations_outer: ["赤沙", "琶洲", "员村", "天河公园", "华景路", "广州东站", "沙河", "云台花园", "大金钟", "广园新村", "梓元岗", "流花", "彩虹桥", "中山八", "如意坊", "芳村", "芳村大道东", "沙涌", "鹤洞东", "下芳村", "大冲口", "龙导尾", "燕子岗", "江泰路", "五凤", "逸景路", "大塘", "龙潭", "赤沙"],
         stations_outer_en: ["Chisha", "Pazhou", "Yuancun", "Tianhe Park", "Huajing New Town", "Guangzhou East Railway Station", "Shahe", "Yuntai Garden", "Dajinzhong", "Guangyuan Xincun", "Ziyuangang", "Liuhua", "Caihongqiao", "Zhongshanba", "Ruyifang", "Fangcun", "Fangcun Dadao East", "Shayong", "Hedong East", "Xiafangcun", "Dachongkou", "Longdaowei", "Yanzigang", "Jiangtai Road", "Wufeng", "Yijing Road", "Datang", "Longtan", "Chisha"],
-        stations_inner: ["梓元岗", "广园新村", "大金钟", "云台花园", "沙河", "广州东站", "华景新城", "天河公园", "员村", "琶洲", "赤沙", "龙潭", "大塘", "逸景路", "五凤", "江泰路", "燕子岗", "龙导尾", "大冲口", "下芳村", "鹤洞东", "沙涌", "芳村大道东", "芳村", "如意坊", "中山八", "彩虹桥", "流花", "梓元岗"],
+        stations_inner: ["梓元岗", "广园新村", "大金钟", "云台花园", "沙河", "广州东站", "华景路", "天河公园", "员村", "琶洲", "赤沙", "龙潭", "大塘", "逸景路", "五凤", "江泰路", "燕子岗", "龙导尾", "大冲口", "下芳村", "鹤洞东", "沙涌", "芳村大道东", "芳村", "如意坊", "中山八", "彩虹桥", "流花", "梓元岗"],
         stations_inner_en: ["Ziyuangang", "Guangyuan Xincun", "Dajinzhong", "Yuntai Garden", "Shahe", "Guangzhou East Railway Station", "Huajing New Town", "Tianhe Park", "Yuancun", "Pazhou", "Chisha", "Longtan", "Datang", "Yijing Road", "Wufeng", "Jiangtai Road", "Yanzigang", "Longdaowei", "Dachongkou", "Xiafangcun", "Hedong East", "Shayong", "Fangcun Dadao East", "Fangcun", "Ruyifang", "Zhongshanba", "Caihongqiao", "Liuhua", "Ziyuangang"],
         transfers: {"彩虹桥": "8号线", "中山八": "5号线", "如意坊": "6号线", "江泰路": "2号线", "五凤": "10号线", "大塘": "3号线", "龙潭": "18号线", "琶洲": "8号线", "员村": "5号线、21号线", "天河公园": "21号线", "广州东站": "1号线、3号线", "沙河": "6号线"}
     },
@@ -135,15 +135,31 @@ const metroData = {
 let currentLineKey = "";
 let currentAudio = null;
 
-function playAudio(src) {
+function playAudio(srcs) {
     if (currentAudio) {
-        currentAudio.pause(); // 如果有正在播放的音频，先暂停
-        currentAudio.currentTime = 0; // 进度条归零
+        currentAudio.pause(); 
+        currentAudio.currentTime = 0;
+        currentAudio.onended = null;
     }
-    currentAudio = new Audio(src);
-    currentAudio.play().catch(err => {
-        console.warn("音频播放失败，可能是浏览器拦截了自动播放，需用户交互后才能播放:", err);
-    });
+    const audioQueue = Array.isArray(srcs) ? srcs : [srcs];
+    let currentIndex = 0;
+    function playNext() {
+        if (currentIndex < audioQueue.length) {
+            currentAudio = new Audio(audioQueue[currentIndex]);
+
+            currentAudio.onended = () => {
+                currentIndex++;
+                playNext();
+            };
+
+            currentAudio.play().catch(err => {
+                console.warn(`音频播放失败 [${audioQueue[currentIndex]}]:`, err);
+                currentIndex++;
+                playNext();
+            });
+        }
+    }
+    playNext();
 }
 
 // 3. 获取 DOM 节点
@@ -178,11 +194,9 @@ function enterSimulator(lineKey) {
     currentLineKey = lineKey;
     const line = metroData[lineKey];
 
-    // 切换视图显隐
     portalView.classList.remove('active');
     simulatorView.classList.add('active');
 
-    // 动态调整模拟器的主题颜色
     const header = document.querySelector('#simulator-view header');
     if (header) {
         header.style.backgroundColor = line.color;
@@ -287,12 +301,34 @@ const marqueeText = document.getElementById('marquee-text');
 
 function updateLED(textContent) {
     marqueeText.innerHTML = `<span class="led-red">${textContent}</span>`;
+
     marqueeText.style.animation = 'none';
     marqueeText.offsetHeight;
-    marqueeText.style.animation = null;
+
+    let charCount = 0;
+    for (let i = 0; i < textContent.length; i++) {
+        if (textContent.charCodeAt(i) > 255) {
+            charCount += 1;
+        } else {
+            charCount += 0.5;
+        }
+    }
+
+    const wordsPerSecond = 3;
+    const duration = charCount / wordsPerSecond;
+
+    marqueeText.style.animationName = 'ledScroll';
+    marqueeText.style.animationDuration = `${duration}s`;
+    marqueeText.style.animationTimingFunction = 'linear';
+    marqueeText.style.animationIterationCount = 'infinite';
 }
 
 document.getElementById('btn-door-close').addEventListener('click', () => {
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
     updateLED("车门即将关闭，请注意安全，谨防被夹！ The doors are closing, take care your safety, and beware of being clamped! ");
 });
 
@@ -322,9 +358,19 @@ document.getElementById('btn-next-station').addEventListener('click', () => {
     updateLED(fullText);
     if (currentLineKey.startsWith('line11')) {
         const direction = dirSelect.value;
-        playAudio(`line11/${direction}/${next_zh}.mp3`);
+
+        if (direction === 'outer') {
+            playAudio([
+                `line11/outer/外环.mp3`,
+                `line11/outer/${next_zh}.mp3`
+            ]);
+        } else {
+            playAudio([
+                `line11/inner/内环.mp3`,
+                `line11/inner/${next_zh}.mp3`
+            ]);
+        }
     }
 });
 
-// 执行初始化
 initPortal();
