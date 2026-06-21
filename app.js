@@ -282,6 +282,29 @@ function updateStations() {
         stationSelect.appendChild(opt);
     }
 }
+function updateLED(textContent) {
+    marqueeText.innerHTML = `<span class="led-red">${textContent}</span>`;
+
+    marqueeText.style.animation = 'none';
+    marqueeText.offsetHeight;
+
+    let charCount = 0;
+    for (let i = 0; i < textContent.length; i++) {
+        if (textContent.charCodeAt(i) > 255) {
+            charCount += 1;
+        } else {
+            charCount += 0.5;
+        }
+    }
+
+    const wordsPerSecond = 2;
+    const duration = charCount / wordsPerSecond;
+
+    marqueeText.style.animationName = 'ledScroll';
+    marqueeText.style.animationDuration = `${duration}s`;
+    marqueeText.style.animationTimingFunction = 'linear';
+    marqueeText.style.animationIterationCount = 'infinite';
+}
 
 // 返回首页逻辑
 btnBack.addEventListener('click', () => {
@@ -298,30 +321,6 @@ btnBack.addEventListener('click', () => {
 dirSelect.addEventListener('change', updateStations);
 
 const marqueeText = document.getElementById('marquee-text');
-
-function updateLED(textContent) {
-    marqueeText.innerHTML = `<span class="led-red">${textContent}</span>`;
-
-    marqueeText.style.animation = 'none';
-    marqueeText.offsetHeight;
-
-    let charCount = 0;
-    for (let i = 0; i < textContent.length; i++) {
-        if (textContent.charCodeAt(i) > 255) {
-            charCount += 1;
-        } else {
-            charCount += 0.5;
-        }
-    }
-
-    const wordsPerSecond = 3;
-    const duration = charCount / wordsPerSecond;
-
-    marqueeText.style.animationName = 'ledScroll';
-    marqueeText.style.animationDuration = `${duration}s`;
-    marqueeText.style.animationTimingFunction = 'linear';
-    marqueeText.style.animationIterationCount = 'infinite';
-}
 
 document.getElementById('btn-door-close').addEventListener('click', () => {
     if (currentAudio) {
